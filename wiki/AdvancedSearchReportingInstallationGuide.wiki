@@ -12,7 +12,7 @@ You will need:
     * the CSV logs
     * the generated reports
     * the JS
-  # Python
+  # Python (can download from [http://python.org python.org])
 
 =Getting Started=
 ==1. Add the Javascript variables to your front end==
@@ -72,7 +72,56 @@ section, right before:
 
 place the following line:
 {{{
- <script language='javascript' src='http://YOUR_HOST/clicklog.js'></script>
+ <script language='javascript' src='http://YOUR_HOST/asr.js'></script>
 }}}
 
 Be sure to change YOUR_HOST above to the host and location where the javascript file can be found.
+
+==3. Add hooks to the search results to not only log the click but also the rank of the search result.=
+
+In this section:
+{{{
+
+<!-- **********************************************************************
+  A single result (do not customize)
+     ********************************************************************** -->
+}}}
+
+replace the following line:
+
+{{{
+      <xsl:text disable-output-escaping='yes'>&lt;a href="</xsl:text>
+}}}
+
+with
+
+{{{
+      <xsl:text disable-output-escaping='yes'>&lt;a
+            ctype="c"
+      </xsl:text>
+            rank=&quot;<xsl:value-of select="position()"/>&quot;
+      <xsl:text disable-output-escaping='yes'>
+            href="</xsl:text>
+}}}
+
+==4. Add hooks the rest of the 'a' tags that have an href (i.e. links) and add a ctype attribute.==
+
+In other words, you want to tag all the different types of links that users might click so that you can report on them easily.  If you miss a link, it's not the end of the world.  They will be automatically converted to ctype=OTHER.  However, the more places where you add ctype attributes, the richer your reporting will be.
+
+For instance, to find out how many times users are clicking on the 'Next page' link, change:
+{{{
+ <a href="search?{$search_url}&amp;start={$view_begin + $num_results - 1}">
+}}}
+
+to:
+
+{{{
+<a ctype="nav.next" href="search?{$search_url}&amp;start={$view_begin + $num_results - 1}">
+}}}
+
+==5. Edit asr.js==
+In your `asr.js` file, replace YOUR_HOST with your host name where your python script can be found in the line below.
+
+{{{
+    var src = "http://YOUR_HOST:8879/click?" + 
+}}}
