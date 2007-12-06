@@ -15,4 +15,40 @@ You will need:
   # Python
 
 =Getting Started=
-  == # Add the Javascript variables to your front end ==
+==  # Add the Javascript variables to your front end==
+
+See below for what should be added:
+{{{
+<!-- **********************************************************************
+ Search results (do not customize)
+     ********************************************************************** -->
+<xsl:template name="search_results">
+<html>
+
+  <!-- *** HTML header and style *** -->
+  <xsl:call-template name="langHeadStart"/>
+    <xsl:call-template name="redirect_if_few_results"/>
+    <title><xsl:value-of select="$result_page_title"/>:
+      <xsl:value-of select="$space_normalized_query"/>
+    </title>
+    <xsl:call-template name="style"/>
+    <script type="text/javascript">
+      <xsl:comment>
+        function resetForms() {
+          for (var i = 0; i &lt; document.forms.length; i++ ) {
+              document.forms[i].reset();
+          }
+        }
+// ---------ADD THE FOLLOWING LINES--------------
+
+        // Search query
+    var page_query = &quot;<xsl:value-of select="$stripped_search_query"/>&quot;
+    // Starting page offset, usually 0 for 1st page, 10 for 2nd, 20 for 3rd.
+    var page_start = &quot;<xsl:value-of select="/GSP/PARAM[@name='start']/@value"/>&quot;
+
+// -----------------------------------------------
+
+      //</xsl:comment>
+    </script>
+  <xsl:call-template name="langHeadEnd"/>
+}}}
