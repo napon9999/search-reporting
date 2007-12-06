@@ -12,3 +12,7 @@ You will need:
     * the CSV logs
     * the generated reports
     * the JS
+  # Python
+
+=Getting Started=
+  == # Add the Javascript variables to your front end ==
