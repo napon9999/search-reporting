@@ -15,7 +15,7 @@ You will need:
   # Python
 
 =Getting Started=
-==  # Add the Javascript variables to your front end==
+==1. Add the Javascript variables to your front end==
 
 See below for what should be added:
 {{{
@@ -52,3 +52,27 @@ See below for what should be added:
     </script>
   <xsl:call-template name="langHeadEnd"/>
 }}}
+
+==2. Pull in the ASR Javascript file that will do the actual logging==
+
+In the same
+{{{
+<!-- **********************************************************************
+ Search results (do not customize)
+     ********************************************************************** -->
+}}}
+
+section, right before:
+
+{{{
+  <!-- *** HTML footer *** -->
+  </body>
+</html>
+}}}
+
+place the following line:
+{{{
+ <script language='javascript' src='http://YOUR_HOST/clicklog.js'></script>
+}}}
+
+Be sure to change YOUR_HOST above to the host and location where the javascript file can be found.
