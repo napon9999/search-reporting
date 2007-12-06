@@ -42,9 +42,9 @@ See below for what should be added:
 // ---------ADD THE FOLLOWING LINES--------------
 
         // Search query
-    var page_query = &quot;<xsl:value-of select="$stripped_search_query"/>&quot;
-    // Starting page offset, usually 0 for 1st page, 10 for 2nd, 20 for 3rd.
-    var page_start = &quot;<xsl:value-of select="/GSP/PARAM[@name='start']/@value"/>&quot;
+        var page_query = &quot;<xsl:value-of select="$stripped_search_query"/>&quot;
+        // Starting page offset, usually 0 for 1st page, 10 for 2nd, 20 for 3rd.
+        var page_start = &quot;<xsl:value-of select="/GSP/PARAM[@name='start']/@value"/>&quot;
 
 // -----------------------------------------------
 
