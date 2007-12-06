@@ -125,3 +125,6 @@ In your `asr.js` file, replace YOUR_HOST with your host name where your python s
 {{{
     var src = "http://YOUR_HOST:8879/click?" + 
 }}}
+
+==5. Edit report.py==
+In your `report.py` file, replace YOUR_GSA with the full hostname of your GSA (e.g. search.mycompany.com) and add any other GSA parameters after the `q=` parameter as you might like.  This is because there is a part of the report that allows you to showcase the top queries and this will allow viewers of the report to be able to click on them and see the results that are returned very easily.
