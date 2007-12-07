@@ -70,9 +70,13 @@ section, right before:
 </html>
 }}}
 
-place the following line:
+add the following lines:
 {{{
  <script language='javascript' src='http://YOUR_HOST/asr.js'></script>
+ <script type='text/javascript'>
+   clk(null, page_query, 'load', '', '', page_start);
+ </script>
+
 }}}
 
 Be sure to change YOUR_HOST above to the host and location where the javascript file can be found.
