@@ -4,6 +4,7 @@
   * `asr.py` -- this is a web server that will run on a custom port and log the clicks. This will always be running.
   * `asr.js` -- this is the javascript file that the XSLT pulls in.
   * `report.py` -- this can be run to generate HTML reports from the CSV logs.  It can be run from a cron job.  _Note: this should be run from a web server dir so the CSV log files are visible._
+  * `blue.gif` -- this is a basic graph to create report graphs.
 
 =Overview=
 
