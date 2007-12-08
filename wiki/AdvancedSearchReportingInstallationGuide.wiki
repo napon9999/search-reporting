@@ -1,10 +1,11 @@
 #labels Featured
 =What's Included?=
 
-  * `asr.py` -- this is a web server that will run on a custom port and log the clicks. This will always be running.
-  * `asr.js` -- this is the javascript file that the XSLT pulls in.
-  * `report.py` -- this can be run to generate HTML reports from the CSV logs.  It can be run from a cron job.  _Note: this should be run from a web server dir so the CSV log files are visible._
-  * `blue.gif` -- this is a basic graph to create report graphs.
+  # `readme.txt` -- this file.
+  # `asr.py` -- this is a web server that will run on a custom port and log the clicks. This will always be running.
+  # `asr.js` -- this is the javascript file that the XSLT pulls in.
+  # `report.py` -- this can be run to generate HTML reports from the CSV logs.  It can be run from a cron job.  _Note: this should be run from a web server dir so the CSV log files are visible._
+  # `blue.gif` -- this is a basic graph to create report graphs.
 
 =Overview=
 
@@ -16,7 +17,11 @@ You will need:
   # Python (can download from [http://python.org python.org])
 
 =Getting Started=
-==1. Add the Javascript variables to your front end==
+==1. Place all 4 of the above listed files on a web server that has python.==
+  * We will refer to this web server below as YOUR_HOST.
+  * The scripts will be creating your log files in this directory on this drive so make sure there is enough room, the server is fast enough, it is not already overloaded with other processes, etc.
+
+==2. Add the Javascript variables to your front end==
 
 See below for what should be added:
 {{{
@@ -54,7 +59,7 @@ See below for what should be added:
   <xsl:call-template name="langHeadEnd"/>
 }}}
 
-==2. Pull in the ASR Javascript file that will do the actual logging==
+==3. Pull in the ASR Javascript file that will do the actual logging==
 
 In the same
 {{{
@@ -82,7 +87,7 @@ add the following lines:
 
 Be sure to change YOUR_HOST above to the host and location where the javascript file can be found.
 
-==3. Add hooks to the search results to not only log the click but also the rank of the search result.=
+==4. Add hooks to the search results to not only log the click but also the rank of the search result.=
 
 In this section:
 {{{
@@ -109,7 +114,7 @@ with
             href="</xsl:text>
 }}}
 
-==4. Add hooks the rest of the 'a' tags that have an href (i.e. links) and add a ctype attribute.==
+==5. Add hooks the rest of the 'a' tags that have an href (i.e. links) and add a ctype attribute.==
 
 In other words, you want to tag all the different types of links that users might click so that you can report on them easily.  If you miss a link, it's not the end of the world.  They will be automatically converted to ctype=OTHER.  However, the more places where you add ctype attributes, the richer your reporting will be.
 
@@ -124,14 +129,25 @@ to:
 <a ctype="nav.next" href="search?{$search_url}&amp;start={$view_begin + $num_results - 1}">
 }}}
 
-==5. Edit asr.js==
+==6. Edit asr.js==
 In your `asr.js` file, replace YOUR_HOST with your host name where your python script can be found in the line below.
 
 {{{
     var src = "http://YOUR_HOST:8879/click?" + 
 }}}
 
-==5. Edit report.py==
+==7. Edit report.py==
 In your `report.py` file, replace YOUR_GSA with the full hostname of your GSA (e.g. search.mycompany.com) and add any other GSA parameters after the `q=` parameter as you might like.  This is because there is a part of the report that allows you to showcase the top queries and this will allow viewers of the report to be able to click on them and see the results that are returned very easily.
 
 Also, in the same file, replace YOUR_HOST with the full hostname where you have placed your javascript & gif files.  This is so your html report graphs are able to find the necessary images.
+
+==8. Run asr.py==
+This will start a web server on port 8879.  Here's how the click logging will work:
+  # A user will make a query or click a link on the GSA
+  # The GSA's HTML code (thanks to the hooks you added to the XSLT above) now contains onclick events that will send both queries and clicked links to this web server (script) on port 8879.
+  # The asr.py script will log the event (.txt file) and append a line to your .csv file.
+  # The web server on port 8879 will then send a response back to the HTML.
+  # You can keep this process running as long as you want.  A new log file and csv file will automatically be created each day (as long as there are at least some clicks each day).
+
+==9. Run report.py==
+Once you have enough information 
