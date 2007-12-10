@@ -116,7 +116,7 @@ with
 
 ==5. Add hooks the rest of the 'a' tags that have an href (i.e. links) and add a ctype attribute.==
 
-In other words, you want to tag all the different types of links that users might click so that you can report on them easily.  If you miss a link, it's not the end of the world.  They will be automatically converted to ctype=OTHER.  However, the more places where you add ctype attributes, the richer your reporting will be.
+In other words, you want to tag all the different types of links that users might click so that you can report on them easily.  If you miss a link, it's not the end of the world.  They will be automatically converted to ctype=OTHER.  However, the more places where you add ctype attributes, the richer your reporting will be and the better analysis you'll be able to perform (like, 30% of all clicks are Key Matches!).
 
 For instance, to find out how many times users are clicking on the 'Next page' link, change:
 {{{
@@ -150,4 +150,8 @@ This will start a web server on port 8879.  Here's how the click logging will wo
   # You can keep this process running as long as you want.  A new log file and csv file will automatically be created each day (as long as there are at least some clicks each day).
 
 ==9. Run report.py==
-Once you have enough information 
+At any point, you can make copies of the .csv files, parse the data, and run any analysis you'd like using your favorite Business Intelligence tool.  The logging is very thorough and detailed and includes every query loaded and every subsequent click by time done, by IP address, etc.  For more information on the fields, see the asr.py file.
+
+At any point, you can run a sample HTML-generating reporting tool (Pythong script) we created for you called report.py.  When run, this script will look in the current directory for any .csv files and create respective .html files.  You can then view these reports to see information such as how many queries occurred without any clicks (opportunity queries), how many satisfied queries occurred, and important metrics such as average click rank.  An average click rank of 8.5, for instance, is not very good and implies that, on average, users are having to go to the bottom of the search results to find the best result.  An average click rank of 1.5, however, is extremely good and implies that half the users click on the first search result and half on the second.  Over time, with proper search quality optimization, you should see your average click rank get lower.  This can be accomplished by implementing some of the best practices listed in the [http://code.google.com/apis/searchappliance/documentation/50/admin_searchexp/ce_understanding.html Understanding the Search Experience] published document.
+
+Good luck!
